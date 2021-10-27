@@ -1,0 +1,106 @@
+[2021-10-27 18:18:36,855] {taskinstance.py:826} INFO - Dependencies all met for <TaskInstance: scrapper.spider_star 2021-10-26T00:00:00+00:00 [queued]>
+[2021-10-27 18:18:36,883] {taskinstance.py:826} INFO - Dependencies all met for <TaskInstance: scrapper.spider_star 2021-10-26T00:00:00+00:00 [queued]>
+[2021-10-27 18:18:36,885] {taskinstance.py:1017} INFO - 
+--------------------------------------------------------------------------------
+[2021-10-27 18:18:36,886] {taskinstance.py:1018} INFO - Starting attempt 1 of 2
+[2021-10-27 18:18:36,887] {taskinstance.py:1019} INFO - 
+--------------------------------------------------------------------------------
+[2021-10-27 18:18:36,962] {taskinstance.py:1038} INFO - Executing <Task(BashOperator): spider_star> on 2021-10-26T00:00:00+00:00
+[2021-10-27 18:18:36,967] {standard_task_runner.py:51} INFO - Started process 170 to run task
+[2021-10-27 18:18:36,990] {standard_task_runner.py:75} INFO - Running: ['airflow', 'tasks', 'run', 'scrapper', 'spider_star', '2021-10-26T00:00:00+00:00', '--job-id', '2', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/my_dag.py', '--cfg-path', '/tmp/tmplfsuc_39']
+[2021-10-27 18:18:36,994] {standard_task_runner.py:76} INFO - Job 2: Subtask spider_star
+[2021-10-27 18:18:37,224] {logging_mixin.py:103} INFO - Running <TaskInstance: scrapper.spider_star 2021-10-26T00:00:00+00:00 [running]> on host 124db322365f
+[2021-10-27 18:18:37,993] {taskinstance.py:1230} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=octadelsueldo@gmail.com
+AIRFLOW_CTX_DAG_OWNER=Octavio
+AIRFLOW_CTX_DAG_ID=scrapper
+AIRFLOW_CTX_TASK_ID=spider_star
+AIRFLOW_CTX_EXECUTION_DATE=2021-10-26T00:00:00+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2021-10-26T00:00:00+00:00
+[2021-10-27 18:18:38,000] {bash.py:135} INFO - Tmp dir root location: 
+ /tmp
+[2021-10-27 18:18:38,007] {bash.py:158} INFO - Running command: cd /opt/airflow/dags/web_scrap;scrapy crawl quotes
+[2021-10-27 18:18:38,091] {bash.py:169} INFO - Output:
+[2021-10-27 18:18:38,109] {bash.py:173} INFO - bash: scrapy: command not found
+[2021-10-27 18:18:38,118] {bash.py:177} INFO - Command exited with return code 127
+[2021-10-27 18:18:38,167] {taskinstance.py:1396} ERROR - Bash command failed. The command returned a non-zero exit code.
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1086, in _run_raw_task
+    self._prepare_and_execute_task_with_callbacks(context, task)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1260, in _prepare_and_execute_task_with_callbacks
+    result = self._execute_task(context, task_copy)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1300, in _execute_task
+    result = task_copy.execute(context=context)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 180, in execute
+    raise AirflowException('Bash command failed. The command returned a non-zero exit code.')
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code.
+[2021-10-27 18:18:38,174] {taskinstance.py:1433} INFO - Marking task as UP_FOR_RETRY. dag_id=scrapper, task_id=spider_star, execution_date=20211026T000000, start_date=20211027T181836, end_date=20211027T181838
+[2021-10-27 18:18:38,220] {configuration.py:344} WARNING - section/key [smtp/smtp_user] not found in config
+[2021-10-27 18:18:38,222] {email.py:184} INFO - Email alerting: attempt 1
+[2021-10-27 18:18:38,229] {configuration.py:344} WARNING - section/key [smtp/smtp_user] not found in config
+[2021-10-27 18:18:38,234] {email.py:184} INFO - Email alerting: attempt 1
+[2021-10-27 18:18:38,237] {taskinstance.py:1446} ERROR - Failed to send email to: ['octadelsueldo@gmail.com']
+[2021-10-27 18:18:38,239] {taskinstance.py:1447} ERROR - [Errno 99] Cannot assign requested address
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1086, in _run_raw_task
+    self._prepare_and_execute_task_with_callbacks(context, task)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1260, in _prepare_and_execute_task_with_callbacks
+    result = self._execute_task(context, task_copy)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1300, in _execute_task
+    result = task_copy.execute(context=context)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 180, in execute
+    raise AirflowException('Bash command failed. The command returned a non-zero exit code.')
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1786, in email_alert
+    send_email(self.task.email, subject, html_content)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 52, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 97, in send_email_smtp
+    send_mime_email(e_from=smtp_mail_from, e_to=recipients, mime_msg=msg, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 186, in send_mime_email
+    conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 220, in _get_smtp_connection
+    else smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 253, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 308, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1444, in handle_failure
+    self.email_alert(error)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1788, in email_alert
+    send_email(self.task.email, subject, html_content_err)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 52, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 97, in send_email_smtp
+    send_mime_email(e_from=smtp_mail_from, e_to=recipients, mime_msg=msg, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 186, in send_mime_email
+    conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 220, in _get_smtp_connection
+    else smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 253, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 308, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+[2021-10-27 18:18:38,370] {local_task_job.py:118} INFO - Task exited with return code 1
